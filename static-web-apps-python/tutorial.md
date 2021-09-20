@@ -563,17 +563,14 @@ There are several databases available on Azure. One of the most powerful ones is
 
 ### Setup your dev environment
 
-Let's go back to our Azure Function in VSCode. We will be using the Cosmos DB MongoDB API, so we need a library to connect to our database. In the `/api` folder, open the `package.json` file and add `"mongodb": "^4.0.1"` to the `dependencies` property as shown below.
+Let's go back to our Azure Function in VSCode. We will be using the Cosmos DB MongoDB API, so we need a library to connect to our database. In the `/api` folder, open the `requirements.txt` file and add `pymongo` at the end of the file as shown below.
 
-```json
-...
-  "dependencies": {
-    "mongodb": "^4.0.1"
-  },
-...
+```txt
+azure-functions
+pymongo
 ```
 
-In a terminal, type `npm install` and hit enter. This will download the dependencies for you to the `node_modules` folder of your Azure Functions App.
+In a terminal, type `pip install -r requirements.txt` and hit enter. This will download the dependencies for you.
 
 While you are in VSCode, let's install the `Azure Database` extension. This will allow you to explore your database and make queries from VSCode without having to go to the Azure Portal.
 
@@ -647,21 +644,20 @@ Do it again for the two following tasks
 
 Now that we have our database setup and have added some data to it, let's make sure our user interface displays it!
 
-In your `tasks-get` Azure Function, start by importing the `mongoClient` from the MongoDB library we installed earlier.
+In your `tasks-get` Azure Function, start by importing the `MongoClient` from the PyMongo library we installed earlier.
 
-```javascript
-const mongoClient = require("mongodb").MongoClient;
+```python
+from pymongo import MongoClient
 ```
 
 When your Static Web App calls the API, the user information is sent to the Function in the `x-ms-client-principal` HTTP header. 
 
 You can use the code below to retrieve the same user JSON you get in the `clientPrincipal` property when you go to `/.auth/me`.
 
-```javascript
-const header = req.headers['x-ms-client-principal'];
-const encoded = Buffer.from(header, 'base64');
-const decoded = encoded.toString('ascii');
-const user = JSON.parse(decoded);
+```python
+
+const header = req.headers.get('x-ms-client-principal')
+principalID = req.headers.get('X-MS-CLIENT-PRINCIPAL-ID')
 ```
 
 Let's see how the MongoDB API works:
@@ -691,8 +687,8 @@ To check how to add your MongoDB connection string in the environment variables 
 
 #### The quick and dirty way
 
-```javascript
-const client = await mongoClient.connect("YOUR-SERVER-CONNECTION-STRING");
+```python
+client = MongoClient("YOUR-SERVER-CONNECTION-STRING")
 ```
 
 ### Request your data
@@ -700,19 +696,19 @@ const client = await mongoClient.connect("YOUR-SERVER-CONNECTION-STRING");
 Once you are connected to your Cosmos DB server using the MongoDB API, you can use this connection to select a database.
 
 ```javascript
-const database = client.db("YOUR-DB-NAME");
+const database = client["YOUR-DB-NAME"]
 ```
 
 Replace `YOUR-DB-NAME` by the name you entered when you created your database.
 
 Then, query the document where the userId property is the same as the userId sent in the headers when your Function is called.
 
-```javascript
-const response = await database.collection("tasks").find({
+```python
+const response = database["tasks"].find({
     userId: user.userId
 });
 
-const tasks = await response.toArray();
+const tasks = [task for task in response]
 ```
 
 <div class="box assignment">
