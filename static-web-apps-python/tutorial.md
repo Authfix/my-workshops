@@ -19,11 +19,11 @@ At the end of this workshop, you will have a full understanding on how to develo
 ### Prerequisites
 
 To do this workshop, you will need:
-* Basic JavaScript knowledge
+* Basic Python knowledge
 * A Microsoft Azure account
 * A GitHub account
 * Visual Studio Code (VSCode)
-* Node.js 12 or higher installed
+* Python 3.8 installed
 * Docker (optional)
 
 --sep--
