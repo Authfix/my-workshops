@@ -284,8 +284,8 @@ A Function scaffold will be created for you so you don't start with a blank proj
 
 Right now, we don't have a database to store our users or our tasks so let's use an array as a "fake" database.
 
-```json
-const tasks = [
+```python
+tasks = [
     {
         id: 1,
         label: "🍔 Eat",
@@ -656,7 +656,7 @@ You can use the code below to retrieve the same user JSON you get in the `client
 
 ```python
 
-const header = req.headers.get('x-ms-client-principal')
+header = req.headers.get('x-ms-client-principal')
 principalID = req.headers.get('X-MS-CLIENT-PRINCIPAL-ID')
 ```
 
