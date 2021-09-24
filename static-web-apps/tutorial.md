@@ -286,21 +286,21 @@ A Function scaffold will be created for you so you don't start with a blank proj
 Right now, we don't have a database to store our users or our tasks so let's use an array as a "fake" database.
 
 ```json
-const tasks = [
+tasks = [
     {
-        id: 1,
-        label: "🍔 Eat",
-        status: ""
+        'id': 1,
+        'label': "🍔 Eat",
+        'status': ""
     },
     {
-        id: 2,
-        label: "🛏 Sleep",
-        status: ""
+        'id': 2,
+        'label': "🛏 Sleep",
+        'status': ""
     },
     {
-        id: 3,
-        label: "</> Code",
-        status: ""
+        'id': 3,
+        'label': "</> Code",
+        'status': ""
     }
 ];
 ```
