@@ -773,4 +773,4 @@ Congratulations, you've reach the end of this workshop!
 
 ## Solution
 
-You can download the completed app code with the features to add and update a task <a href="https://github.com/tagazok/my-workshops/raw/master/static-web-apps/data/swa-workshop-final.zip" target="_blank">here</a>
+You can download the completed app code with the features to add and update a task <a href="https://github.com/authfix/my-workshops/raw/feature/swa-python/static-web-apps-python/data/swa-workshop-final.zip" target="_blank">here</a>
